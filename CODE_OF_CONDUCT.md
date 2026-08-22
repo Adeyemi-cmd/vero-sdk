@@ -49,7 +49,7 @@ an individual is officially representing the community in public spaces.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement by opening an
-issue on the [Vero-Sdk issue tracker](https://github.com/Vero-protocol/Vero-Sdk/issues).
+issue on the [vero-sdk issue tracker](https://github.com/Vero-protocol/vero-sdk/issues).
 
 All complaints will be reviewed and investigated promptly and fairly. All
 community leaders are obligated to respect the privacy and security of the

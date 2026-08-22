@@ -24,8 +24,8 @@ ask on the issue first.
 ## Local setup
 
 ```bash
-git clone https://github.com/Vero-protocol/Vero-Sdk.git
-cd Vero-Sdk
+git clone https://github.com/Vero-protocol/vero-sdk.git
+cd vero-sdk
 npm install
 ```
 

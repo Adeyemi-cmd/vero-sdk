@@ -13,7 +13,7 @@ This package is pre-1.0. Security fixes land on the latest minor release only.
 **Please do not report security vulnerabilities through public GitHub issues.**
 
 Report them privately through
-[GitHub's private vulnerability reporting](https://github.com/Vero-protocol/Vero-Sdk/security/advisories/new)
+[GitHub's private vulnerability reporting](https://github.com/Vero-protocol/vero-sdk/security/advisories/new)
 on this repository. That keeps the details out of public view until a fix is
 available.
 

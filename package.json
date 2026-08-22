@@ -5,11 +5,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vero-protocol/Vero-Sdk.git"
+    "url": "https://github.com/Vero-protocol/vero-sdk.git"
   },
-  "homepage": "https://github.com/Vero-protocol/Vero-Sdk#readme",
+  "homepage": "https://github.com/Vero-protocol/vero-sdk#readme",
   "bugs": {
-    "url": "https://github.com/Vero-protocol/Vero-Sdk/issues"
+    "url": "https://github.com/Vero-protocol/vero-sdk/issues"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

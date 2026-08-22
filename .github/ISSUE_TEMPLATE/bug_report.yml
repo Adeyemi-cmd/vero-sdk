@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         For security vulnerabilities, do **not** file here — follow
-        [SECURITY.md](https://github.com/Vero-protocol/Vero-Sdk/blob/main/SECURITY.md).
+        [SECURITY.md](https://github.com/Vero-protocol/vero-sdk/blob/main/SECURITY.md).
 
   - type: dropdown
     id: module
