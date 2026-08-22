@@ -1,0 +1,134 @@
+# Vero SDK
+
+Shared Stellar client library for the [Vero Protocol](https://github.com/Vero-protocol).
+
+## Why this exists
+
+The relayer, engine, and dashboard each grew their own copy of the same three
+concerns — RPC failover, sequence/nonce management, and Stellar interaction —
+and they drifted. That drift produced real, separately-filed bugs:
+
+| Bug | Repo | Cause |
+| --- | --- | --- |
+| [#164](https://github.com/Vero-protocol/vero-core-engine/issues/164) | core-engine | `NonceManager.reserve()` check-then-act race |
+| [#183](https://github.com/Vero-protocol/vero-core-engine/issues/183) | core-engine | `refresh()` bypasses the per-account lock |
+| [#198](https://github.com/Vero-protocol/vero-relayer-service/issues/198) | relayer-service | Cached sequence defeats the advisory lock |
+| [#182](https://github.com/Vero-protocol/vero-core-engine/issues/182) | core-engine | RPC client quarantines healthy endpoints |
+| [#288](https://github.com/Vero-protocol/vero-guardian-dashboard/issues/288) | guardian-dashboard | Endpoint URL validation accepts plaintext `http://` |
+
+Three implementations means fixing each bug three times — or, more realistically,
+fixing it once and leaving the other two broken. This package is where that
+logic lives now.
+
+## Status
+
+**Pre-1.0, under active construction.** Implemented today:
+
+- `types` — shared protocol types (`Role`, `DataKey`, `Task`, `Vote`)
+- `errors` — `VeroError` with stable, switchable `VeroErrorCode`s
+- `network` — network config and HTTPS-enforcing endpoint validation
+- `rpc` — RPC client with failover, health tracking, and origin-safe URL building
+
+Nonce management, transaction building, wallet adapters, and the typed contract
+client are tracked as open issues. Contributions welcome — see below.
+
+## Install
+
+```bash
+npm install @vero-protocol/sdk
+```
+
+## Usage
+
+### Configuring a network
+
+```ts
+import { createNetworkConfig, TESTNET, isCustomEndpoint } from '@vero-protocol/sdk';
+
+const config = createNetworkConfig(TESTNET);
+
+// Overrides are validated, not trusted:
+const custom = createNetworkConfig(TESTNET, {
+  horizonUrl: 'https://my-horizon.example',
+});
+
+if (isCustomEndpoint(custom)) {
+  // Surface this to the user before they sign anything.
+}
+```
+
+Plaintext `http://` is rejected. On-chain role and consensus data flows through
+these endpoints and feeds signing decisions, so an interceptable endpoint is a
+real risk — not a theoretical one. Loopback HTTP is available for local
+development, but only via an explicit opt-in:
+
+```ts
+validateUrl('http://localhost:8000', { allowInsecureLocalhost: true });
+```
+
+### Making RPC calls with failover
+
+```ts
+import { RpcClient } from '@vero-protocol/sdk';
+
+const rpc = new RpcClient({
+  endpoints: [
+    { url: 'https://primary.example', priority: 0 },
+    { url: 'https://backup.example', priority: 1 },
+  ],
+  timeoutMs: 10_000,
+});
+
+const account = await rpc.request('/accounts/GABC...');
+console.table(rpc.health());
+```
+
+Endpoints are penalised for *transport* failures only — unreachable, timeout,
+5xx. A 404 for a missing account tells you nothing about endpoint health, and
+treating it as a failure is how a single bad request could knock every healthy
+endpoint out of rotation.
+
+### Handling errors
+
+```ts
+import { VeroError, VeroErrorCode } from '@vero-protocol/sdk';
+
+try {
+  await rpc.request('/accounts/GABC...');
+} catch (err) {
+  if (err instanceof VeroError) {
+    switch (err.code) {
+      case VeroErrorCode.AccountNotFound:
+        // ...
+        break;
+      case VeroErrorCode.AllEndpointsFailed:
+        // ...
+        break;
+    }
+  }
+}
+```
+
+Switch on `code`, never on message text — messages change, codes don't.
+
+## Development
+
+```bash
+npm install
+npm test
+npm run typecheck
+npm run lint
+npm run build
+```
+
+Requires Node.js 20+.
+
+## Contributing
+
+Work here is funded through [GrantFox](https://contribute.grantfox.xyz/). Claim
+an issue, get assigned, then open a PR referencing `Closes #<issue-number>`.
+Full details in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE)

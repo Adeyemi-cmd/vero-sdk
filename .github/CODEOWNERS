@@ -1,0 +1,8 @@
+# Default owners for everything in this repository.
+# No per-module subdivision yet — revisit as the contributor base grows.
+*                       @N-thnI @N-i-xx
+
+# Security-sensitive surfaces get explicit ownership.
+/src/network/           @N-thnI @N-i-xx
+/src/rpc/               @N-thnI @N-i-xx
+/.github/workflows/     @N-thnI @N-i-xx

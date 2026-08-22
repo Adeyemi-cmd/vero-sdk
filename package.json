@@ -1,0 +1,47 @@
+{
+  "name": "@vero-protocol/sdk",
+  "version": "0.1.0",
+  "description": "Shared Stellar client library for the Vero Protocol — typed contract client, nonce management, RPC failover, and wallet adapters.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vero-protocol/Vero-Sdk.git"
+  },
+  "homepage": "https://github.com/Vero-protocol/Vero-Sdk#readme",
+  "bugs": {
+    "url": "https://github.com/Vero-protocol/Vero-Sdk/issues"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "stellar",
+    "soroban",
+    "vero-protocol",
+    "blockchain",
+    "sdk"
+  ],
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "jest": "^30.0.0",
+    "ts-jest": "^29.2.0",
+    "typescript": "^5.6.0"
+  }
+}
