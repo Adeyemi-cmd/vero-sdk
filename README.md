@@ -28,6 +28,8 @@ logic lives now.
 - `errors` — `VeroError` with stable, switchable `VeroErrorCode`s
 - `network` — network config and HTTPS-enforcing endpoint validation
 - `rpc` — RPC client with failover, health tracking, and origin-safe URL building
+- `resilience` — opt-in per-endpoint circuit breaker and background health
+  probing, so recovery doesn't wait for a user request to discover it
 
 Nonce management, transaction building, wallet adapters, and the typed contract
 client are tracked as open issues. Contributions welcome — see below.
