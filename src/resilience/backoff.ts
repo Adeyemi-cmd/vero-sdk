@@ -1,4 +1,4 @@
-import { VeroError, VeroErrorCode } from '../errors';
+import { VeroError, VeroErrorCode } from '../errors/index.js';
 
 export interface RetryOptions {
   /**

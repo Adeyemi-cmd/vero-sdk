@@ -1,5 +1,7 @@
 # Vero SDK
 
+[![codecov](https://codecov.io/gh/Vero-protocol/vero-sdk/branch/main/graph/badge.svg)](https://codecov.io/gh/Vero-protocol/vero-sdk)
+
 Shared Stellar client library for the [Vero Protocol](https://github.com/Vero-protocol).
 
 ## Why this exists
@@ -28,11 +30,10 @@ logic lives now.
 - `errors` — `VeroError` with stable, switchable `VeroErrorCode`s
 - `network` — network config and HTTPS-enforcing endpoint validation
 - `rpc` — RPC client with failover, health tracking, and origin-safe URL building
-- `resilience` — opt-in per-endpoint circuit breaker and background health
-  probing, so recovery doesn't wait for a user request to discover it
+- `contract` — typed read/write wrappers for the Vero core contract entrypoints
 
-Nonce management, transaction building, wallet adapters, and the typed contract
-client are tracked as open issues. Contributions welcome — see below.
+Wallet adapters and higher-level transaction builders are tracked as open
+issues. Contributions welcome — see below.
 
 ## Install
 
