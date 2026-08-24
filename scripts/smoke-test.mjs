@@ -16,14 +16,18 @@ const REQUIRED_EXPORTS = [
   'isCustomEndpoint',
   'TESTNET',
   'MAINNET',
+  'retry',
+  'defaultIsRetryable',
 ];
 
 const DECLARATION_CHECKS = [
   ['cjs', 'index.d.ts', /export \* from '\.\/(types|errors|network|rpc|nonce)\/index\.js'/],
+  ['cjs', 'index.d.ts', /export \* from '\.\/resilience\/backoff\.js'/],
   ['cjs', 'errors/index.d.ts', 'VeroError'],
   ['cjs', 'rpc/index.d.ts', 'RpcClient'],
   ['cjs', 'nonce/index.d.ts', 'NonceManager'],
   ['esm', 'index.d.ts', /export \* from '\.\/(types|errors|network|rpc|nonce)\/index\.js'/],
+  ['esm', 'index.d.ts', /export \* from '\.\/resilience\/backoff\.js'/],
   ['esm', 'errors/index.d.ts', 'VeroError'],
   ['esm', 'rpc/index.d.ts', 'RpcClient'],
   ['esm', 'nonce/index.d.ts', 'NonceManager'],
